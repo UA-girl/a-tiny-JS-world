@@ -1,31 +1,63 @@
 /* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
    Complete the below for code reviewers' convenience:
 
-   Code repository: _put repo URL here_
+   Code repository: https://github.com/UA-girl/a-tiny-JS-world
    Web app: _put project's github pages URL here_
    */
 
 // ======== OBJECTS DEFINITIONS ========
-// Define your objects here
 
+const woman = {
+    species: 'human',
+    name: 'Alice',
+    age: 25,
+    gender: 'female',
+    legs: 2,
+    hands: 2,
+    say: 'Hello, dear!',
+    friends: ['Adam', 'Stephany', 'Iren']
+}
+
+const man = {
+    species: 'human',
+    name: 'Adam',
+    age: 35,
+    gender: 'male',
+    legs: 2,
+    hands: 2,
+    say: 'Hey!',
+    friends: ['Alice', 'Stephany', 'Jeorge', 'Jack']
+}
+
+const dog = {
+    species: 'dog',
+    name: 'Margo',
+    age: 5,
+    gender: 'female',
+    legs: 4,
+    hands: 0,
+    say: 'Buf-buf!',
+    friends: ['Jack', 'Pashtet', 'Cesar']
+}
+
+const cat = {
+    species: 'cat',
+    name: 'Pashtet',
+    age: 8,
+    gender: 'male',
+    legs: 4,
+    hands: 0,
+    say: 'Meu-meu!',
+    friends: ['Margo', 'Murka']
+}
 
 // ======== OUTPUT ========
-/* Use print(message) for output.
-   Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
 
-   Message can contain HTML markup. You may also tweak index.html and/or styles.css.
-   However, please, REFRAIN from improving visuals at least until your code is reviewed
-   so code reviewers might focus on a single file that is index.js.
-   */
+function createMessageForPrint(obj) {
+    let message = `My name is <strong>${obj.name}</strong>. I am a <strong>${obj.species}</strong>. I am a <strong>${obj.age}</strong> old <strong>${obj.gender}</strong>. `;
+    message += `I have <strong>${obj.hands ? obj.hands : 'no'}</strong> hands and <strong>${obj.legs}</strong>. I can say <strong>"${obj.say}"</strong> to my friends <strong>${obj.friends.join(', ')}</strong>.`;
+    return message
+}
 
-/* Print examples:
-   print('ABC');
-   print('<strong>ABC</strong>');
-   print('<strong>ABC</strong>', 'div');
-
-   print('human; John; male; 2; 2; Hello world!; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
-   */
-
-
+const inhabitats = [man, woman, dog, cat];
+inhabitats.forEach(item => print(createMessageForPrint(item, 'div')));
