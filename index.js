@@ -2,62 +2,59 @@
    Complete the below for code reviewers' convenience:
 
    Code repository: https://github.com/UA-girl/a-tiny-JS-world
-   Web app: _put project's github pages URL here_
+   Web app: https://ua-girl.github.io/a-tiny-JS-world/
    */
 
 // ======== OBJECTS DEFINITIONS ========
 
-const woman = {
-    species: 'human',
-    name: 'Alice',
-    age: 25,
-    gender: 'female',
-    legs: 2,
-    hands: 2,
-    say: 'Hello, dear!',
-    friends: ['Adam', 'Stephany', 'Iren']
+class Creature {
+    constructor(species, name, age, gender, say) {
+        this.species = species;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.say = say;
+    }
+
+    getDescription() {
+        return `${this.say}! My name is ${this.name} and I am ${this.age} years old ${this.gender} ${this.species}. `}
 }
 
-const man = {
-    species: 'human',
-    name: 'Adam',
-    age: 35,
-    gender: 'male',
-    legs: 2,
-    hands: 2,
-    say: 'Hey!',
-    friends: ['Alice', 'Stephany', 'Jeorge', 'Jack']
+class Person extends Creature {
+    constructor(species, name, age, gender, say, friends = []) {
+        super(species, name, age, gender, say);
+        this.hands = 2;
+        this.legs = 2;
+        this.friends = friends.length > 0 ? friends : [];
+    }
+
+    getDescription() {
+        let message = super.getDescription();
+        message += `I have ${this.legs} legs and ${this.hands} hands. My friends are ${this.friends.join(', ')}.`;
+        return message
+    }
 }
 
-const dog = {
-    species: 'dog',
-    name: 'Margo',
-    age: 5,
-    gender: 'female',
-    legs: 4,
-    hands: 0,
-    say: 'Buf-buf!',
-    friends: ['Jack', 'Pashtet', 'Cesar']
+class Animal extends Creature {
+    constructor(species, name, age, gender, say, friends = []) {
+        super(species, name, age, gender, say);
+        this.legs = 4;
+        this.friends = friends.length > 0 ? friends : [];
+    }
+
+    getDescription() {
+        let message = super.getDescription();
+        message += `I have ${this.legs} legs. My friends are ${this.friends.join(', ')}.`;
+        return message
+    }
 }
 
-const cat = {
-    species: 'cat',
-    name: 'Pashtet',
-    age: 8,
-    gender: 'male',
-    legs: 4,
-    hands: 0,
-    say: 'Meu-meu!',
-    friends: ['Margo', 'Murka']
-}
+const woman = new Person(species='human', name='Alice', age = 25, gender = 'female', say = 'Hello, dear!', friends = ['Adam', 'Stephany', 'Iren']);
+const man = new Person(species='human', name='Adam', age = 35, gender = 'male', say = 'Hey!', friends = ['Alice', 'Stephany', 'Jeorge', 'Jack']);
+const dog = new Animal(species='dog', name='Margo', age = 7, gender = 'female', say = 'Buf-buf!', friends = ['Jack', 'Pashtet', 'Cesar']);
+const cat = new Animal(species='cat', name='Murzik', age = 4, gender = 'male', say = 'Meow-meow!', friends = ['Margo', 'Murka']);
 
 // ======== OUTPUT ========
 
-function createMessageForPrint(obj) {
-    let message = `My name is <strong>${obj.name}</strong>. I am a <strong>${obj.species}</strong>. I am a <strong>${obj.age}</strong> old <strong>${obj.gender}</strong>. `;
-    message += `I have <strong>${obj.hands ? obj.hands : 'no'}</strong> hands and <strong>${obj.legs}</strong>. I can say <strong>"${obj.say}"</strong> to my friends <strong>${obj.friends.join(', ')}</strong>.`;
-    return message
-}
-
 const inhabitats = [man, woman, dog, cat];
-inhabitats.forEach(item => print(createMessageForPrint(item, 'div')));
+inhabitats.forEach(item => print(item.getDescription(), 'div'));
