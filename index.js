@@ -17,6 +17,10 @@ class Creature {
         this.legs = legs
         this.friends = friends.length > 0 ? friends : [];
     }
+
+    toString() {
+        return `${this.say}! My name is ${this.name} and I am ${this.age} years old ${this.gender} ${this.species}.`
+    }
 }
 
 class Person extends Creature {
@@ -26,7 +30,7 @@ class Person extends Creature {
     }
 
     toString() {
-        return `${this.say}! My name is ${this.name} and I am ${this.age} years old ${this.gender} ${this.species}. I have ${this.legs} legs and ${this.hands} hands. My friends are ${this.friends.join(', ')}.`
+        return super.toString() + ` I have ${this.legs} legs and ${this.hands} hands. My friends are ${this.friends.join(', ')}.`
     }
 }
 
@@ -36,7 +40,7 @@ class Animal extends Creature {
     }
 
     toString() {
-        return `${this.say}! My name is ${this.name} and I am ${this.age} years old ${this.gender} ${this.species}. I have ${this.legs} legs. My friends are ${this.friends.join(', ')}.`;
+        return super.toString() + ` I have ${this.legs} legs. My friends are ${this.friends.join(', ')}.`;
     }
 }
 
